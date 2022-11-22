@@ -40,9 +40,10 @@ const newManager = () => {
       const id = response.idNumber;      
       const email = response.email;
       const officeNum = response.officeNum;
+      const role = 'Manager';
 
       const addManager = () => {
-        const manager = new Manager(name, id, email, officeNum)
+        const manager = new Manager(name, id, email, role, officeNum)
         team.push(manager);
         console.log(team)
       };
@@ -52,33 +53,6 @@ const newManager = () => {
   });
 };
 
-
-const newEmployee = () => {
-  inquirer
-  .prompt([
-    {
-      type: 'input',
-      message: `What is the new employee's name?`,
-      name: 'name',
-    },
-    {
-      type: 'input',
-      message: `What is the new employee's ID Number?`,
-      name: 'idNumber',
-    },
-    {
-      type: 'input',
-      message: `What is the new employee's email address?`,
-      name: 'email',
-    },
-  ])
-
-  .then((response) => {
-      const name = response.name      
-      const id = response.idNumber;      
-      const email = response.email;
-  });
-};
 
 // WHEN I enter the team manager’s name, employee ID, email address, and office number
 // THEN I am presented with a menu with the option to add an engineer or an intern or to finish building my team
@@ -114,18 +88,47 @@ function addTeamMember() {
 // WHEN I select the engineer option
 // THEN I am prompted to enter the engineer’s name, ID, email, and GitHub username, and I am taken back to the menu
 const newEngineer = () => {
-  newEmployee();
   inquirer
   .prompt([
+    {
+      type: 'input',
+      message: `What is the new employee's name?`,
+      name: 'name',
+    },
+    {
+      type: 'input',
+      message: `What is the new employee's ID Number?`,
+      name: 'idNumber',
+    },
+    {
+      type: 'input',
+      message: `What is the new employee's email address?`,
+      name: 'email',
+    },
     {
       type: 'input',
       message: `What is the Engineer's gitHub username?`,
       name: 'username',
     }
   ])
+
   .then((response) => {
+    const name = response.name      
+    const id = response.idNumber;      
+    const email = response.email;
     const githubUsername = response.username
-    const engineer = new Engineer (name, ID, email, githubUsername)
+    const role = 'Engineer';
+
+
+    const addEngineer = () => {
+      const engineer = new Engineer(name, id, email, role, githubUsername)
+      team.push(engineer);
+      console.log(team)
+    };
+
+    Engineer();
+    addTeamMember();
+
   });
 };
 
@@ -133,20 +136,47 @@ const newEngineer = () => {
 // WHEN I select the intern option
 // THEN I am prompted to enter the intern’s name, ID, email, and school, and I am taken back to the menu
 const newIntern = () => {
-  newEmployee();
   inquirer
   .prompt(
+    {
+      type: 'input',
+      message: `What is the new employee's name?`,
+      name: 'name',
+    },
+    {
+      type: 'input',
+      message: `What is the new employee's ID Number?`,
+      name: 'idNumber',
+    },
+    {
+      type: 'input',
+      message: `What is the new employee's email address?`,
+      name: 'email',
+    },
     {
       type: 'input',
       message: `What school does the intern attend?`,
       name: 'school',
     })
+
   .then((response) => {
-      const school = response.school
-      const intern = new Intern (name, ID, email, school)
+    const name = response.name      
+    const id = response.idNumber;      
+    const email = response.email;
+    const school = response.school;
+    const role = 'Intern';
+
+    
+    const addIntern = () => {
+      const intern = new Intern(name, id, email, role, school)
+      team.push(intern);
+      console.log(team)
+    };
+
+    addIntern();
+    addTeamMember();
+
   });
 };
-
-
 
 newManager();
