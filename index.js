@@ -1,6 +1,5 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
@@ -79,6 +78,12 @@ function addTeamMember() {
   });
 };
 
+renderCard = (teamMember) => {
+  
+}
+
+team.forEach((member) => renderCard(member));
+
       // fs.writeFile('index.html', printHTML, (err) => {
       //   err ? console.error(err) : console.log('HTML Created!')
       // });
@@ -126,7 +131,7 @@ const newEngineer = () => {
       console.log(team)
     };
 
-    Engineer();
+    addEngineer();
     addTeamMember();
 
   });
@@ -137,7 +142,7 @@ const newEngineer = () => {
 // THEN I am prompted to enter the intern’s name, ID, email, and school, and I am taken back to the menu
 const newIntern = () => {
   inquirer
-  .prompt(
+  .prompt([
     {
       type: 'input',
       message: `What is the new employee's name?`,
@@ -157,7 +162,8 @@ const newIntern = () => {
       type: 'input',
       message: `What school does the intern attend?`,
       name: 'school',
-    })
+    }
+  ])
 
   .then((response) => {
     const name = response.name      

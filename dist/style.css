@@ -1,8 +1,36 @@
-header {
+body {
+    background-color: rgb(177, 214, 255);
+}
 
+header {
+    /* justify-content: center; */
+    /* align-items: center;
+    text-align: center;
+    align-content: center; */
+    /* margin-top: 2rem; */
+    margin-bottom: 3rem;
+    background-color: royalblue;
+    padding: 3rem
 }
 
 h1 {
-
+    /* text-align: center;
+    justify-content: center; */
 }
 
+.card{
+    background-color: aliceblue;
+    margin: .25rem; 
+    padding: .3rem;
+    margin: .3rem;
+}
+
+.card-header{
+    background-color: navy;
+    color:aliceblue
+}
+
+ul{
+    list-style: none;
+
+}

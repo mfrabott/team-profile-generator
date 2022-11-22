@@ -5,33 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Team</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="../dist/style.css">
   </head>
   
-  <body>
+  <body >
     <header>
-      <h1>My Team</h1>
+      <h1 class='text-center'>My Team</h1>
     </header>
     
-    <main>
+    <main class="container">
+      <div class="row text-center">
+        <div class="card col-3">
+          <div class="card-header">
+            ${role}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">${name}</h5>
+            <ul>
+              <li class="'email"><strong>Email: </strong><a href="mailto: ${email}">${email}</a></li>
+              <li class="school"><strong>School: </strong>${school}</li>
+              <li class="office"><strong>Office Number: </strong>${officeNum}</li>
+              <li class="github"><strong>GitHub: </strong><a href=https://www.github.com/${githubUsername}>${githubUsername}</a> </li>
+            </ul>
+          </div>
+        </div>
 
-      <div class="card text-center">
-        <div class="card-header">
-          Featured
+      
+        <div class="card col-3">
+          <div class="card-header">
+            ${role}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">${name}</h5>
+            <ul>
+              <li class="'email"><strong>Email: </strong><a href="mailto: ${email}">${email}</a></li>
+              <li class="school"><strong>School: </strong>${school}</li>
+              <li class="office"><strong>Office Number: </strong>${officeNum}</li>
+              <li class="github"><strong>GitHub: </strong><a href=https://www.github.com/${githubUsername}>${githubUsername}</a> </li>
+            </ul>
+          </div>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
 
       <ul>
-        <li class="role"><strong>Position: </strong> ${role}</li>
-        <li class="name"><strong>Name: </strong> ${name}</li>
-        <li class="id"><strong>ID: </strong> ${id}</li>
-        <li class="'email"><strong>Email: </strong><a href="mailto: ${email}">${email}</a></li>
-        <li class="school">${school}</li>
-        <li class="github"><a href=https://www.github.com/${githubUsername}>${githubUsername}</a> </li>
+
       </ul>
 
     </main>
