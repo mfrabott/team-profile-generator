@@ -4,7 +4,7 @@ const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
 const team = [];
-
+const cards = [];
 
 // TODO: Inquirer Inputs
 // WHEN I start the application
@@ -42,7 +42,7 @@ const newManager = () => {
       const role = 'Manager';
 
       const addManager = () => {
-        const manager = new Manager(name, id, email, role, officeNum)
+        const manager = new Manager(name, id, email, officeNum)
         team.push(manager);
         console.log(team)
       };
@@ -73,16 +73,161 @@ function addTeamMember() {
     } else if (response.addEmployee === 'Intern') {
       newIntern();
     } else {
-      console.log('escaped');
+
+      const headHTML = `
+      <!doctype html>
+      <html lang="en">
+        <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>My Team</title>
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+          <link rel="stylesheet" href="../dist/style.css">
+        </head>
+        
+        <body >
+          <header>
+            <h1 class='text-center'>My Team</h1>
+          </header>
+          
+          <main class="container">
+            <div class="row justify-content-center text-center employee-cards">`
+
+      const footHTML = `
+          </main>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        </body>
+      </html>`
+
+      team.forEach(member => {
+        console.log(member)
+        console.log(member.role)
+        if (member.role === 'Manager'){
+          const card = 
+      `        <div class="card col-3">
+                <div class="card-header">${member.role}</div>
+                <div class="card-body">
+                  <h5 class="card-title">${member.name}</h5>
+                  <ul>
+                    <li><strong>EmployeeID: </strong>${member.ID}</li>
+                    <li><strong>Email: </strong><a href="mailto: ${member.email}">${member.email}</a></li>
+                    <li><strong>Office Number: </strong>${member.officeNumber}</li>
+                  </ul>
+                </div>
+              </div>`
+          cards.push(card)
+        } else if (member.role === 'Engineer') {
+              const card =       
+      `        <div class="card col-3">
+                <div class="card-header">${member.role}</div>
+                <div class="card-body">
+                  <h5 class="card-title">${member.name}</h5>
+                  <ul>
+                    <li><strong>EmployeeID: </strong>${member.ID}</li>
+                    <li><strong>Email: </strong><a href="mailto: ${member.email}">${member.email}</a></li>
+                    <li><strong>GitHub: </strong><a href=https://www.github.com/${member.githubUsername}>${member.githubUsername}</a> </li>
+                  </ul>
+                </div>
+              </div>`
+              cards.push(card)
+        } else if (member.role === 'Intern'){
+              const card =  
+      `        <div class="card col-3">
+                <div class="card-header">${member.role}</div>
+                <div class="card-body">
+                  <h5 class="card-title">${member.name}</h5>
+                  <ul>
+                    <li><strong>EmployeeID: </strong>${member.ID}</li>
+                    <li><strong>Email: </strong><a href="mailto: ${member.email}">${member.email}</a></li>
+                    <li><strong>School: </strong>${member.school}</li>
+                  </ul>
+                </div>
+              </div>`
+              cards.push(card)
+        }
+      })
+
+      const printHTML = headHTML + cards.join('') + footHTML
+
+        fs.writeFile('./dist/index.html', printHTML, (err) => {
+          err ? console.error(err) : console.log('HTML Created!')
+      });
     };
   });
 };
 
-renderCard = (teamMember) => {
+// renderCard = (teamMember) => {
+//   const cardEl = document.createElement('div');
+//   cardEl.classList.add('card', 'col-3');
   
-}
+//   const cardHeaderEl = document.createElement('div');
+//   cardHeaderEl.classList.add('card-header');
+//   cardHeaderEl.textContent = teamMember.role;
+//   cardEl.appendChild(cardHeaderEl)
 
-team.forEach((member) => renderCard(member));
+//   const cardBodyEl = document.createElement('div');
+//   cardBodyEl.classList.add('card-body');
+//   cardEl.appendChild(cardBodyEl);
+  
+//   const cardBodyTitle = document.createElement('h5');
+//   cardBodyTitle.classList.add('card-title');
+//   cardBodyTitle.textContent = teamMember.name;
+//   cardBodyEl.appendChild(cardBodyTitle);
+
+//   const cardListEl =  document.createElement('ul');
+//   cardBodyEl.appendChild(cardListEl);
+
+//   const emailListItem =  document.createElement('li');
+//   const strongEmailEl = document.createElement('strong');
+//   const emailLink = document.createElement('a');
+//   strongEmailEl.textContent = 'Email: ';
+//   emailListItem.appendChild(strongEmailEl);
+//   emailLink.setAttribute('href', `mailto:${teamMember.email}`)
+//   emailListItem.appendChild(emailLink)
+//   emailListItem.textContent = teamMember.email;
+//   cardListEl.appendChild(emailListItem);
+
+//   if (teamMember.officeNum){
+    
+//     const officeListItem =  document.createElement('li');
+//     const strongOfficeEl = document.createElement('strong');
+//     strongOfficeEl.textContent = 'Office Number: ';
+//     officeListItem.appendChild(strongOfficeEl);
+//     officeListItem.textContent = teamMember.officeNum;
+//     cardListEl.appendChild(officeListItem);
+
+//   } else if (teamMember.github) {
+    
+//     const githubListItem =  document.createElement('li');
+//     const strongGithubEl = document.createElement('strong');
+//     const githubLink = document.createElement('a');
+//     strongGithubEl.textContent = 'GitHub: ';
+//     githubListItem.appendChild(strongGithubEl);
+//     githubLink.setAttribute('href', `https://www.github.com/${teamMember.github}`)
+//     githubListItem.appendChild(githubLink)
+//     githubListItem.textContent = teamMember.github;
+//     cardListEl.appendChild(githubListItem);
+
+//   } else if (teamMember.school) {
+
+//     const schoolListItem =  document.createElement('li');
+//     const strongSchoolEl = document.createElement('strong');
+//     strongSchoolEl.textContent = 'School: ';
+//     schoolListItem.appendChild(strongSchoolEl);
+//     schoolListItem.textContent = teamMember.school;
+//     cardListEl.appendChild(schoolListItem);
+//   }
+
+//   employeeCardsEL.appendChild(cardEl)
+
+// }
+
+// team.forEach((member) => renderCard(member));
+
+
+
+
+
 
       // fs.writeFile('index.html', printHTML, (err) => {
       //   err ? console.error(err) : console.log('HTML Created!')
