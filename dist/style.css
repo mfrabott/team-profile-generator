@@ -18,6 +18,12 @@ h1 {
     justify-content: center; */
 }
 
+.cards{
+    align-items: center;
+    justify-content: center;
+    
+}
+
 .card{
     background-color: aliceblue;
     margin: .25rem; 
