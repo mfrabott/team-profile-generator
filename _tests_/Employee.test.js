@@ -1,14 +1,23 @@
 const Employee = require('../lib/Employee')
 
 describe("Employee", () => {
-    describe("getName", () => {
-      it("should acquire the name of the employee from input", () => {
-        const testName = "Ghandi";
-  
-        const testEmployee = new Employee();
-        testEmployee.getName(testName);
+    describe("getAttributes", () => {
+      it("should  create an Employee object and return the employee attributes passed through the input parameters", () => {
+        const testName = "Steve";
+        const testID = "999"
+        const testEmail = 'steve@aol.com'
 
-        expect(testEmployee.name).toEqual(testName);
+        const testEmployee = new Employee(testName, testID, testEmail);
+
+        nameResult = testEmployee.getName();
+        idResult = testEmployee.getId();
+        emailResult = testEmployee.getEmail()
+        roleResult = testEmployee.getRole()
+        
+        expect(nameResult).toEqual(testName);
+        expect(idResult).toEqual(testID);
+        expect(emailResult).toEqual(testEmail);
+        expect(roleResult).toEqual('Employee');
       });
     });
   });
