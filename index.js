@@ -43,7 +43,6 @@ const newManager = () => {
       const addManager = () => {
         const manager = new Manager(name, id, email, officeNum)
         team.push(manager);
-        console.log(team)
       };
       addManager();
       addTeamMember();
@@ -184,8 +183,6 @@ function addTeamMember() {
       `
 
       team.forEach(member => {
-        console.log(member)
-        console.log(member.role)
         if (member.role === 'Manager'){
           const card = 
             ` <div class="card col-3">
@@ -211,7 +208,7 @@ function addTeamMember() {
                   <ul>
                     <li><strong>Employee ID: </strong>${member.ID}</li>
                     <li><strong>Email: </strong><a href="mailto: ${member.email}">${member.email}</a></li>
-                    <li><strong>GitHub: </strong><a href=https://www.github.com/${member.githubUsername}>${member.githubUsername}</a> </li>
+                    <li><strong>GitHub: </strong><a href=https://www.github.com/${member.githubUsername} target="_blank">${member.githubUsername} </a> </li>
                   </ul>
                 </div>
               </div>
